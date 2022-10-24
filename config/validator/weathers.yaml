@@ -1,0 +1,22 @@
+App\Entity\Weather:
+  properties:
+    temp_c:
+      - Range:
+          min: -100
+          max: 100
+          groups: [edit]
+      - NotBlank:
+          groups: [edit]
+    rain_probability:
+      - Range:
+          min: 0
+          max: 100
+          groups: [edit]
+      - NotBlank:
+          groups: [edit]
+    pressure:
+      - Range:
+          min: 1000
+          max: 1100
+      - NotBlank:
+          groups: [edit]

@@ -1,0 +1,16 @@
+App\Entity\Location:
+  properties:
+    lat:
+      - Range:
+          min: -90
+          max: 90
+          groups: [edit]
+      - NotBlank:
+          groups: [edit]
+    lon:
+      - Range:
+          min: -180
+          max: 180
+          groups: [edit]
+      - NotBlank:
+          groups: [edit]
