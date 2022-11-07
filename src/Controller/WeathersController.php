@@ -16,6 +16,7 @@ class WeathersController extends AbstractController
     #[Route('/', name: 'app_weathers_index', methods: ['GET'])]
     public function index(WeatherRepository $weatherRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_MEASUREMENT_EDIT');
         return $this->render('weathers/index.html.twig', [
             'weather' => $weatherRepository->findAll(),
         ]);
@@ -24,6 +25,7 @@ class WeathersController extends AbstractController
     #[Route('/new', name: 'app_weathers_new', methods: ['GET', 'POST'])]
     public function new(Request $request, WeatherRepository $weatherRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_MEASUREMENT_EDIT');
         $weather = new Weather();
         $form = $this->createForm(WeatherType::class, $weather, ['validation_groups' => ['edit']
         ]);
@@ -52,6 +54,7 @@ class WeathersController extends AbstractController
     #[Route('/{id}/edit', name: 'app_weathers_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Weather $weather, WeatherRepository $weatherRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_MEASUREMENT_EDIT');
         $form = $this->createForm(WeatherType::class, $weather, ['validation_groups' => ['edit']
         ]);
         $form->handleRequest($request);
@@ -71,6 +74,7 @@ class WeathersController extends AbstractController
     #[Route('/{id}', name: 'app_weathers_delete', methods: ['POST'])]
     public function delete(Request $request, Weather $weather, WeatherRepository $weatherRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_MEASUREMENT_EDIT');
         if ($this->isCsrfTokenValid('delete'.$weather->getId(), $request->request->get('_token'))) {
             $weatherRepository->remove($weather, true);
         }

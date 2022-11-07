@@ -10,5 +10,15 @@
 <ul>
 {% for w in weathers %}
 <li>{{ w.date|date('d.m.Y') }}: {{ w.temp_c }}&deg;C</br>Opis: {{w.description}}, Ciśnienie: {{w.pressure}} hPa</li> {% endfor %}
-</ul> </div>
+</ul>
+{%if is_granted('ROLE_MEASUREMENT_EDIT') %}
+<a href="{{ path('app_weathers_index') }}">Go to weather</a>
+<a href="{{ path('app_location_index') }}">Go to location</a>
+<a href="{{ path('app_logout') }}">Logout</a>
+{% endif %}
+{% if not is_granted('ROLE_MEASUREMENT_EDIT') %}
+   <a href="{{ path('app_login') }}">Login</a>
+{% endif %}
+ </div>
+
    {% endblock %}
